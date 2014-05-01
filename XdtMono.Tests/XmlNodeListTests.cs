@@ -8,6 +8,7 @@ namespace XdtMono.Tests
 	public class XmlNodeListTests
 	{
 		[Test]
+		[Ignore("Works on Mono")]
 		public void RemoveNodeFromRootShouldNotChangeXmlNodeList ()
 		{
 			string xml = 
@@ -25,6 +26,34 @@ namespace XdtMono.Tests
 			doc.DocumentElement.RemoveChild (firstChild);
 
 			Assert.AreEqual (3, children.Count);
+		}
+
+		[Test]
+		public void RemoveNodeFromRootAfterSingleIterationOfForEachLoopShouldNotChangeXmlNodeList ()
+		{
+			string xml = 
+@"<root>
+	<child id='1'/>
+</root>";
+			var doc = new XmlDocument ();
+			doc.LoadXml (xml);
+			XmlNodeList children = doc.SelectNodes ("//child");
+			XmlNode firstChild = null;
+
+			foreach (XmlNode node in children) {
+				firstChild = node;
+				break;
+			}
+
+			doc.DocumentElement.RemoveChild (firstChild);
+
+			XmlNode firstChildAfterRemove = null;
+			foreach (XmlNode node in children) {
+				firstChildAfterRemove = node;
+				break;
+			}
+
+			Assert.IsNotNull (firstChildAfterRemove);
 		}
 	}
 }
