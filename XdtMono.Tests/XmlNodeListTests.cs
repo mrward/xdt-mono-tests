@@ -29,7 +29,7 @@ namespace XdtMono.Tests
 		}
 
 		[Test]
-		public void RemoveNodeFromRootAfterSingleIterationOfForEachLoopShouldNotChangeXmlNodeList ()
+		public void RemoveNodeFromRootAfterSingleIterationOfForEachLoopShouldReturnNullNode ()
 		{
 			string xml = 
 @"<root>
@@ -54,6 +54,7 @@ namespace XdtMono.Tests
 			}
 
 			Assert.IsNotNull (firstChildAfterRemove);
+			Assert.AreSame (firstChild, firstChildAfterRemove);
 		}
 	}
 }
