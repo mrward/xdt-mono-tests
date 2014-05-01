@@ -29,7 +29,7 @@ namespace XdtMono.Tests
 		}
 
 		[Test]
-		public void RemoveNodeFromRootAfterSingleIterationOfForEachLoopShouldReturnNullNode ()
+		public void RemoveNodeFromRootAfterSingleIterationOfForEachLoopShouldReturnNotNullNode ()
 		{
 			string xml = 
 @"<root>
